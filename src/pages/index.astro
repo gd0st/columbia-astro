@@ -5,7 +5,26 @@ import Card from '../components/Card.astro';
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
+		<h1>Yannick Dorn</h1>
+		<section>
+			<p>Hello, I am a Linux Systems Engineer working for a FinTech in Chicago.</p>
+			<p>I can write code in various languages, and speak in human a couple more</p>
+			<p>In my freetime I enjoy playing rugby, play instruments, and read books</p>
+		</section>
+
+		<section>
+			More info here?
+		</section>
+
+		<nav></nav>
+
+		<section></section>
+
+		<ul role="list" class="link-card-grid">
+			<Card href="https://github.com/2mill", title="Github", body="I like to publish code here."/>
+			<Card href="https://www.goodreads.com/user/show/94962031-yannick", title="Goodreads", body="My reading inconsistent reading log"/>
+		</ul>
+
 		<p class="instructions">
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.

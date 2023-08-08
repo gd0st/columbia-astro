@@ -7,20 +7,11 @@ const { href, iconHref } = Astro.props;
 ---
 
 <a href={href}>
-    <button>
-        <img src={iconHref}/>
-    </button>
+    <img src={iconHref}/>
 </a>
 
 <style>
-    button {
-        background-color: black;
-        filter: drop-shadow(16px 16px 0 gray);
-        border: black;
-        margin: 1em;
-    }
     img {
-        margin: 2em;
         filter: invert(100%);
     }
-</styles>
+</style>

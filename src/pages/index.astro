@@ -1,71 +1,62 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import Icon from '../components/Icon.astro'
----
-<Layout title="Welcome to Astro.">
-	<main>
-	<header>
-		<div class="p-3 border rounded-tl-md text-pearlBush border-b-0">
-			<h1 class="font-presstart text-center text-4xl">
-				Yannick Dorn
-			</h1>
-		</div>
-	</header>
-	<div class="flex flex-row">
-		<div class="border-l border-r grid grid-cols-1 w-1/6">
-			<div class="">
-			</div>
-			<div class="border-t">
-			</div>
-		</div>
-		<div class="w-4/6 border-y">
-			<ul class="flex flex-row text-center box-border justify-center w-full font-inconsolata">
-					<li class="hover:bg-[#e0e1dd] hover:text-[#1b263b] w-full border-r">
-						<a href="https://github.com/2mill" class="">
-							<p>github</p>
-						</a>
-					</li>
-					<li class="hover:bg-[#e0e1dd] hover:text-[#1b263b] w-full border-r">
-						<a href="https://www.goodreads.com/user/show/94962031-yannick" class="">
-							<p>goodreads</p>
-						</a>
-					</li>
-					<li class="hover:bg-[#e0e1dd] hover:text-[#1b263b] w-full border-r">
-						<a href="https://instagram.com/yannick_dorn" class="">
-							<p>instagram</p>
-						</a>
-					</li>
-			</ul>
-		</div>
-		<div class="border-r grid grid-cols-1 w-1/6">
-			<div class="">
-			</div>
-			<div class="border-t">
-			</div>
-		</div>
-	</div>
+import PageLayout from "@/layouts/Base";
+import PostPreview from "@/components/blog/PostPreview";
+import SocialList from "@/components/SocialList";
+import { getAllPosts, sortMDByDate } from "@/utils";
 
-	<div class="px-2 border rounded-br-md border-t-0">
-		<div class="grid grid-cols-1 font-inconsolata text-xl">
-			<p class="p-1">Hello,</p>
-			<p class="p-1">I am a Jr. Systems Engineer working for a FinTech company in Chicago. I program with typescript, python, rust, bash and a little golang. I can also deploy and manage applications on Linux.</p>
-			<p class="p-1">During my freetime I like to learn new languages, play music and work on personal projects.</p>
-		</div>
-		<ul class="flex flex-row box-border w-full">
-				<li class="w-1/3">
-					<a href="example.org">
-						<div class="p-5 text-center">
-						</div>
-					</a>
-				</li>
+const MAX_POSTS = 10;
+const allPosts = await getAllPosts();
+const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
+
+const cactusTech: Array<{ title: string; desc: string; href: string }> = [
+	{
+		title: "Kadeu",
+		desc: "A CLI-first multi serialized flashcard program. (WIP)",
+		href: "https://github.com/gd0st/kadeu",
+	},
+	{
+		title: "Columbia Astro",
+		desc: "This website, but based on the Cactus Tech Theme with AstroJS",
+		href: "https://github.com/gd0st/columbia-astro",
+	},
+    {
+        title: "gonetchat",
+        desc: "A simple TCP web chat written in Go",
+        href: "https://github.com/gd0st/gonetchat"
+    }
+];
+---
+
+<PageLayout meta={{ title: "Home" }}>
+	<section>
+		<h1 class="title mb-6">Hello World!</h1>
+		<p class="mb-4">
+           Hi, I am a Linux Systems Engineer and Developer based out of the Chicago area.
+
+           I am primarily develpoing with Rust right now, but enjoy using Golang, Python and Javscript as well.
+
+           During my freetime I like to learn new languages, play music and work on personal projects.
+		</p>
+		<SocialList />
+	</section>
+	<section class="mt-16">
+		<h2 class="title mb-4 text-xl">Projects</h2>
+		<ul class="space-y-4 sm:space-y-2">
+			{
+				cactusTech.map(({ href, title, desc }) => (
+					<li>
+						<a
+							href={href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="cactus-link inline-block"
+						>
+							{title}
+						</a>: 
+						<p class="inline-block sm:mt-2">{desc}</p>
+					</li>
+				))
+			}
 		</ul>
-	</div>
-		<div class="text-right text-xs underline italic opacity-1/2 bg-[#0d1b2a]">
-			<a href="https://github.com/2mill/Columbia">
-				<p class="text-right">Source Code</p>
-			</a>
-		</div>
-	</main>
-<script src="https://kit.fontawesome.com/3d1b5ebdca.js" crossorigin="anonymous"></script>
-</Layout>
+	</section>
+</PageLayout>
